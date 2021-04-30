@@ -14,7 +14,7 @@ declare (strict_types=1);
  */
 namespace DragonBe\Vies;
 
-use DateTime;
+use DateTimeInterface;
 use InvalidArgumentException;
 use stdClass;
 
@@ -41,7 +41,7 @@ class CheckVatResponse
      */
     protected $vatNumber;
     /**
-     * @var DateTime The date of the request
+     * @var DateTimeInterface The date of the request
      */
     protected $requestDate;
     /**
@@ -146,11 +146,11 @@ class CheckVatResponse
     /**
      * Sets the date- and timestamp when the VIES service response was created
      *
-     * @param DateTime $requestDate
+     * @param DateTimeInterface $requestDate
      *
      * @return self
      */
-    public function setRequestDate(DateTime $requestDate): self
+    public function setRequestDate(DateTimeInterface $requestDate): self
     {
         $this->requestDate = $requestDate;
 
@@ -160,9 +160,9 @@ class CheckVatResponse
     /**
      * Retrieves the date- and timestamp the VIES service response was created
      *
-     * @return DateTime
+     * @return DateTimeInterface
      */
-    public function getRequestDate(): DateTime
+    public function getRequestDate(): DateTimeInterface
     {
         $this->requestDate = $this->requestDate ?? date_create();
 
@@ -374,7 +374,7 @@ class CheckVatResponse
         }
 
         $requestDateTime = $row->requestDate;
-        if (! $row->requestDate instanceof DateTime) {
+        if (! $row->requestDate instanceof DateTimeInterface) {
             // prepare request date
             $requestDateTime = date_create_from_format(
                 self::VIES_DATETIME_FORMAT,
